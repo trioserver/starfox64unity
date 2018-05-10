@@ -6,7 +6,8 @@ public class LookRotation : MonoBehaviour {
 
     public Transform target;
     public float speed;
-    public float viewRange = 15.0f;
+    public float viewRangeY = 10.0f;
+    public float viewRangeX = 10.0f;
 
     private float x = 0;
     private float y = 0;
@@ -19,26 +20,25 @@ public class LookRotation : MonoBehaviour {
 
         //Vector3 newDir = Vector3.RotateTowards(transform.);
         Quaternion lookRotation = Quaternion.LookRotation(relativePos);
-        Debug.Log(lookRotation.eulerAngles.x);
-        if(lookRotation.eulerAngles.x > viewRange && lookRotation.eulerAngles.x < 160.0f)
+        if(lookRotation.eulerAngles.x > viewRangeX && lookRotation.eulerAngles.x < 160.0f)
         {
-            x = viewRange;
+            x = viewRangeX;
         }
-        else if(lookRotation.eulerAngles.x > viewRange && lookRotation.eulerAngles.x < 345.0f)
+        else if(lookRotation.eulerAngles.x > viewRangeX && lookRotation.eulerAngles.x < (360.0f-viewRangeX))
         {
-            x = -viewRange;
+            x = -viewRangeX;
         }
         else
         {
             x = lookRotation.eulerAngles.x;
         }
-        if (lookRotation.eulerAngles.y > viewRange && lookRotation.eulerAngles.y < 160.0f)
+        if (lookRotation.eulerAngles.y > viewRangeY && lookRotation.eulerAngles.y < 160.0f)
         {
-            y = viewRange;
+            y = viewRangeY;
         }
-        else if (lookRotation.eulerAngles.y > viewRange && lookRotation.eulerAngles.y < 345.0f)
+        else if (lookRotation.eulerAngles.y > viewRangeY && lookRotation.eulerAngles.y < (360.0f-viewRangeY))
         {
-            y = -viewRange;
+            y = -viewRangeY;
         }
         else
         {

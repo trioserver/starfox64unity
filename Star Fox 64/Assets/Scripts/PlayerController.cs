@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
     private bool col = false;
+    private float bankAngle = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -21,11 +22,29 @@ public class PlayerController : MonoBehaviour {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = -Input.GetAxis("Vertical");
 
-        Vector3 direction = new Vector3(moveHorizontal,moveVertical,0);
-        Vector3 finalDirection = new Vector3(moveHorizontal,moveVertical,1.0f);
+        if (moveHorizontal > 0)
+        {
+            bankAngle = 30.0f;
+        }
+        else if (moveHorizontal < 0)
+        {
+            bankAngle = -30.0f;
+        }
+        else
+        {
+            bankAngle = 0.0f;
+        }
 
-        transform.position += direction* speed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(finalDirection),Mathf.Deg2Rad*50.0f);
+        Vector3 direction = new Vector3(moveHorizontal, moveVertical, 0);
+        Vector3 finalDirection = new Vector3(moveHorizontal, moveVertical, 1.0f);
+        Quaternion look = Quaternion.LookRotation(finalDirection);
+        look = look*Quaternion.AngleAxis(bankAngle, Vector3.forward);
+
+        transform.position += direction * speed * Time.deltaTime;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, look, Mathf.Deg2Rad * 50.0f);
+
+        //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, bankAngle);
+
         //moveHorizontal *= Time.deltaTime;
         //moveVertical *= Time.deltaTime;
         /**
