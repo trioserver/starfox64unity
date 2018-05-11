@@ -55,7 +55,7 @@ public class LookRotation : MonoBehaviour {
             {
                 z = target.eulerAngles.z;
             }
-            z = z / 4;
+            //z = z / 4;
             lookRotation.eulerAngles = new Vector3(x, y, z);
         }
         else
