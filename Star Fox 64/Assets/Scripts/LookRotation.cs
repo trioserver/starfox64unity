@@ -6,8 +6,8 @@ public class LookRotation : MonoBehaviour {
 
     public Transform target;
     public float speed;
-    public float viewRangeY = 10.0f;
-    public float viewRangeX = 10.0f;
+    public float viewRangeY = 2.0f;
+    public float viewRangeX = 2.0f;
 
     private float x = 0;
     private float y = 0;
@@ -44,7 +44,24 @@ public class LookRotation : MonoBehaviour {
         {
             y = lookRotation.eulerAngles.y;
         }
-        lookRotation.eulerAngles = new Vector3(x,y,0);
+        if (target.eulerAngles.z != 0)
+        {
+            float z;
+            if(target.eulerAngles.z > 160.0f)
+            {
+                z = target.eulerAngles.z - 360.0f;
+            } 
+            else
+            {
+                z = target.eulerAngles.z;
+            }
+            z = z / 4;
+            lookRotation.eulerAngles = new Vector3(x, y, z);
+        }
+        else
+        {
+            lookRotation.eulerAngles = new Vector3(x, y, 0);
+        }
         //lookRotation.eulerAngles = new Vector3(Mathf.Clamp(lookRotation.eulerAngles.x, -15.0f,viewRange), Mathf.Clamp(lookRotation.eulerAngles.y, -15.0f,viewRange), 0);
         transform.rotation = Quaternion.RotateTowards(transform.rotation,lookRotation,speed*Time.deltaTime);
         //transform.rotation = Quaternion.RotateTowards(transform.rotation,lookRotation,Mathf.Deg2Rad*30.0f);
