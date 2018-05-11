@@ -8,14 +8,20 @@ public class FireLaser : MonoBehaviour {
     public float velocity = 100.0f;
     public float laserBeginsAheadFloat = 1.0f;
 
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetButtonDown("Fire1"))
+    // Update is called once per frame
+    void Update() {
+        if (Input.GetButtonDown("Fire1"))
         {
             Vector3 laserBeginsAt = transform.position;
             laserBeginsAt.z += laserBeginsAheadFloat;
-            Rigidbody newLaser = Instantiate(laser, laserBeginsAt, laser.rotation) as Rigidbody;
-            newLaser.AddForce(transform.forward * velocity, ForceMode.VelocityChange);
+            Rigidbody newLaser = Instantiate(laser, laserBeginsAt, transform.rotation) as Rigidbody;
+            newLaser.AddForce(transform.forward * velocity*Time.deltaTime, ForceMode.VelocityChange);
         }
+        /*
+        if (Vector3.Distance(transform.position,laser.position) < 10.0f)
+        {
+            laser.rotation = transform.rotation;
+        }
+        */
 	}
 }
