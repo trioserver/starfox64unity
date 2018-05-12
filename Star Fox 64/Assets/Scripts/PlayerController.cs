@@ -24,11 +24,11 @@ public class PlayerController : MonoBehaviour {
 
         if (moveHorizontal > 0)
         {
-            bankAngle = 30.0f;
+            bankAngle = -50.0f;
         }
         else if (moveHorizontal < 0)
         {
-            bankAngle = -30.0f;
+            bankAngle = 50.0f;
         }
         else
         {
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
         look = look*Quaternion.AngleAxis(bankAngle, Vector3.forward);
 
         transform.position += direction * speed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, look, Mathf.Deg2Rad * 50.0f);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, look, Mathf.Deg2Rad * 200.0f);
 
         //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, bankAngle);
 
