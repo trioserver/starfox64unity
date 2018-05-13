@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
     private bool col = false;
     private float bankAngle = 0.0f;
+    private float hardBankAngle = 90.0f;
+    private float bankAngleSpeed;
+    private bool hardBankRightLock = false;
+    private bool hardBankLeftLock = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,52 +25,58 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate() {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = -Input.GetAxis("Vertical");
+        bool hardBankRight = Input.GetButton("HardBankRight");
+        bool hardBankLeft = Input.GetButton("HardBankLeft");
 
-        if (moveHorizontal > 0)
+        if ((hardBankRight || hardBankLeft) != true)
         {
-            bankAngle = -50.0f;
-        }
-        else if (moveHorizontal < 0)
-        {
-            bankAngle = 50.0f;
+            hardBankRightLock = false;
+            hardBankLeftLock = false;
+            bankAngleSpeed = 2.5f;
+
+            if (moveHorizontal > 0)
+            {
+                bankAngle = -50.0f;
+            }
+            else if (moveHorizontal < 0)
+            {
+                bankAngle = 50.0f;
+            }
+            else
+            {
+                bankAngle = 0.0f;
+            }
         }
         else
         {
-            bankAngle = 0.0f;
+            if ((hardBankRight == true) && (hardBankLeftLock == false))
+            {
+                bankAngle = hardBankAngle;
+                hardBankRightLock = true;
+            }
+            else if ((hardBankLeft == true) && (hardBankRightLock == false))
+            {
+                bankAngle = -hardBankAngle;
+                hardBankLeftLock = true;
+            }
+            bankAngleSpeed = 5.0f;
         }
-
         Vector3 direction = new Vector3(moveHorizontal, moveVertical, 0);
         Vector3 finalDirection = new Vector3(moveHorizontal, moveVertical, 1.0f);
         Quaternion look = Quaternion.LookRotation(finalDirection);
         look = look*Quaternion.AngleAxis(bankAngle, Vector3.forward);
 
         transform.position += direction * speed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, look, Mathf.Deg2Rad * 200.0f);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, look, bankAngleSpeed);
 
-        //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, bankAngle);
-
-        //moveHorizontal *= Time.deltaTime;
-        //moveVertical *= Time.deltaTime;
-        /**
-        if (col == false) {
-            rb.MovePosition(transform.position + (new Vector3(moveHorizontal, moveVertical, 0.0F)) * speed * Time.deltaTime);
-            
-        } else
-        {
-
-        }
-    **/
     }
     private void OnCollisionEnter(Collision collision)
     {
         col = true;
-        //rb.AddForce(transform.up * 10.0f);
-        //rb.AddForce(transform.right * 10.0f);
     }
 
     private void OnCollisionExit(Collision collision)
     {
         col = false;
-        //rb.ResetInertiaTensor();
     }
 }

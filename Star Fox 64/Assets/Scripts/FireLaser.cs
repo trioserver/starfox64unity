@@ -17,11 +17,5 @@ public class FireLaser : MonoBehaviour {
             Rigidbody newLaser = Instantiate(laser, laserBeginsAt, transform.rotation) as Rigidbody;
             newLaser.AddForce(transform.forward * velocity*Time.deltaTime, ForceMode.VelocityChange);
         }
-        /*
-        if (Vector3.Distance(transform.position,laser.position) < 10.0f)
-        {
-            laser.rotation = transform.rotation;
-        }
-        */
 	}
 }

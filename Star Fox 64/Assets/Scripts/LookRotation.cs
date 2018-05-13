@@ -13,12 +13,10 @@ public class LookRotation : MonoBehaviour {
     private float y = 0;
 	
 	void Update () {
-        //Vector3 rotation = transform.eulerAngles;
 
         Vector3 relativePos = target.position - transform.position;
         float step = speed * Time.deltaTime;
 
-        //Vector3 newDir = Vector3.RotateTowards(transform.);
         Quaternion lookRotation = Quaternion.LookRotation(relativePos);
         if(lookRotation.eulerAngles.x > viewRangeX && lookRotation.eulerAngles.x < 160.0f)
         {
@@ -47,13 +45,22 @@ public class LookRotation : MonoBehaviour {
         if (target.eulerAngles.z != 0)
         {
             float z;
+            float maxLookAngle = 5.0f;
             if(target.eulerAngles.z > 160.0f)
             {
                 z = target.eulerAngles.z - 360.0f;
+                if (z < -maxLookAngle)
+                {
+                    z = -maxLookAngle;
+                }
             } 
             else
             {
                 z = target.eulerAngles.z;
+                if (z > maxLookAngle)
+                {
+                    z = maxLookAngle;
+                }
             }
             //z = z / 4;
             lookRotation.eulerAngles = new Vector3(x, y, z);
@@ -62,9 +69,7 @@ public class LookRotation : MonoBehaviour {
         {
             lookRotation.eulerAngles = new Vector3(x, y, 0);
         }
-        //lookRotation.eulerAngles = new Vector3(Mathf.Clamp(lookRotation.eulerAngles.x, -15.0f,viewRange), Mathf.Clamp(lookRotation.eulerAngles.y, -15.0f,viewRange), 0);
+
         transform.rotation = Quaternion.RotateTowards(transform.rotation,lookRotation,speed*Time.deltaTime);
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation,lookRotation,Mathf.Deg2Rad*30.0f);
-        //transform.rotation = lookRotation;
     }
 }
