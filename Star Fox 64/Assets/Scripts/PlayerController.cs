@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
     private bool col = false;
     private float bankAngle = 0.0f;
-    private float hardBankAngle = 90.0f;
+    private float hardBankAngle = 89.0f;
     private float bankAngleSpeed;
     private bool hardBankRightLock = false;
     private bool hardBankLeftLock = false;
@@ -49,16 +49,29 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            if ((hardBankRight == true) && (hardBankLeftLock == false))
+            if ((hardBankRight == true) && (hardBankLeft == false))
             {
                 bankAngle = hardBankAngle;
                 hardBankRightLock = true;
             }
-            else if ((hardBankLeft == true) && (hardBankRightLock == false))
+            else if ((hardBankLeft == true) && (hardBankRight == false))
             {
                 bankAngle = -hardBankAngle;
                 hardBankLeftLock = true;
             }
+            /**
+            else
+            {
+                if (hardBankRightLock == true)
+                {
+                    bankAngle = hardBankAngle;
+                }
+                else
+                {
+                    bankAngle = -hardBankAngle;
+                }
+            }
+            */
             bankAngleSpeed = 5.0f;
         }
         Vector3 direction = new Vector3(moveHorizontal, moveVertical, 0);
