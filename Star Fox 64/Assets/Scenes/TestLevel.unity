@@ -398,9 +398,15 @@ Prefab:
     - target: {fileID: 114213972165198208, guid: 1fe60d28b32173747b00ed04897ca7a9,
         type: 2}
       propertyPath: Rails_On
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114213972165198208, guid: 1fe60d28b32173747b00ed04897ca7a9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114213972165198208, guid: 1fe60d28b32173747b00ed04897ca7a9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1fe60d28b32173747b00ed04897ca7a9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1949074172
