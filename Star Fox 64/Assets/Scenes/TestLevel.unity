@@ -188,6 +188,30 @@ Rigidbody:
   m_PrefabParentObject: {fileID: 54066275419640586, guid: 1fe60d28b32173747b00ed04897ca7a9,
     type: 2}
   m_PrefabInternal: {fileID: 1874231167}
+--- !u!1 &864636473 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1819319156218472, guid: 1fe60d28b32173747b00ed04897ca7a9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1874231167}
+--- !u!114 &864636474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 864636473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47d1dbbee6ff974ba1c2a7a73c7cdd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rails_On: 1
+  pc: {fileID: 864636477}
+--- !u!114 &864636477 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114256735327756498, guid: 1fe60d28b32173747b00ed04897ca7a9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1874231167}
+  m_Script: {fileID: 11500000, guid: 408402f35db29c846a810061b866e301, type: 3}
 --- !u!1001 &1127406237
 Prefab:
   m_ObjectHideFlags: 0
