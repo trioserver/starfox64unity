@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     private bool hardBankRightLock = false;
     private bool hardBankLeftLock = false;
 
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
         // R||L Bumper input == false; give ship banking behavior based on joystick input
         if ((hardBankRight || hardBankLeft) == false)
         {
-            BankAngle(moveHorizontal,moveVertical,ref bankAngle, ref bankAngleSpeed);
+            BankAngle(moveHorizontal, moveVertical, ref bankAngle, ref bankAngleSpeed);
         }
 
         // R||L Bumper input == true; give ship banking behavior based on bumper input
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, look, bankAngleSpeed);
 
         // Boost input
-        if (boost && brake){}
+        if (boost && brake) { }
         else if (boost && !brake)
         {
             boostLock = true;
