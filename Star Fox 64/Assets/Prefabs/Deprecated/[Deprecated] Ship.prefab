@@ -3588,7 +3588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408402f35db29c846a810061b866e301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
 --- !u!114 &114975967582689512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3601,5 +3600,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser: {fileID: 54941984600957210, guid: 1d197454c3ef39d43b25c30ae6500bfc, type: 2}
-  velocity: 10000
   laserBeginsAheadFloat: 4

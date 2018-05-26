@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFire : MonoBehaviour
+public class Deprecated_EnemyFire : MonoBehaviour
 {
 
     public Rigidbody laser;
@@ -29,15 +29,18 @@ public class EnemyFire : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        triggered = true;
-        InvokeRepeating("Fire",2.0f,1.5f);
+        if (other.gameObject.tag == "EnemyBoxTrigger")
+        {
+            triggered = true;
+            InvokeRepeating("Fire", 2.0f, 1.5f);
+        }
     }
 
-    void Fire()
+    public void Fire()
     {
         Vector3 newDir = (target.position - transform.position);
         Rigidbody instance = Instantiate(laser,transform.position + transform.forward*3.0f,transform.rotation);
-        instance.AddForce(transform.forward * 2000.0f * Time.deltaTime, ForceMode.VelocityChange);
+        instance.AddForce(transform.forward * 4000.0f * Time.deltaTime, ForceMode.VelocityChange);
     }
 
     /*

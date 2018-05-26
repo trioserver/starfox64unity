@@ -6,7 +6,7 @@ public class FireLaser : MonoBehaviour
 {
 
     public Rigidbody laser;
-    private float velocity = 10000.0f;
+    private float velocity = 5000.0f;
     public float laserBeginsAheadFloat = 2.0f;
 
     void Update()

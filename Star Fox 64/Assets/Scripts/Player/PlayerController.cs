@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
-    private const float MOVEMENT_SPEED_X_Y = 10.0f;
+    private const float MOVEMENT_SPEED_X_Y = 15.0f;
     private const float RAIL_SPEED = 10.0f;
     private const float BANK_ANGLE = 50.0f;
     private const float BANK_ANGLE_SPEED = 2.5f;
@@ -141,8 +141,18 @@ public class PlayerController : MonoBehaviour
         bank_angle_speed = HARD_BANK_ANGLE_SPEED;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Laser")
+        {
+            Debug.Log("destroy laser");
+            Destroy(other.gameObject);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Ship hit");
         col = true;
     }
 

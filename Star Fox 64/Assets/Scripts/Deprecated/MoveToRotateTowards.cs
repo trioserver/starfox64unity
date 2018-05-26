@@ -11,12 +11,10 @@ public class MoveToRotateTowards : MonoBehaviour
 
     public Rigidbody target;
 
-    public bool triggered = false;
+    public bool destinationReached = false;
 
     void Start ()
     {
-        //target = GetComponent<Rigidbody>();
-        //rb = GetComponent<Rigidbody>();
 	}
 	
 	void FixedUpdate ()
@@ -25,8 +23,9 @@ public class MoveToRotateTowards : MonoBehaviour
         Vector3 destination = new Vector3(transformPositionX, transformPositionY,transformPositionZ);
         transform.position = Vector3.MoveTowards(transform.position,destination,30.0F*Time.deltaTime);
 
-        if (triggered)
+        if (destination == transform.position)
         {
+            destinationReached = true;
             Vector3 targetDir = target.position - transform.position;
             Quaternion look = Quaternion.LookRotation(targetDir);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, look, 200.0f * Time.deltaTime);
@@ -36,7 +35,9 @@ public class MoveToRotateTowards : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Enter trigger");
-        triggered = true;
+        if (other.tag == "Laser")
+        {
+            Destroy(gameObject);
+        }
     }
 }
